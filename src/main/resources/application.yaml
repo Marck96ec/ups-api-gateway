@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enable: false
+    gateway:
+      locator:
+        enable: true
+      routes:
+        - id: customer-middleend-route
+          url: lb://CUSTOMER-MIDDLEEND
+          predicates:
+            - Path= /api/v1/customer/**
+        - id: account-middleend-route
+          url: lb://ACCOUNT-MIDDLEEND
+          predicates:
+            - Path= /api/v1/account/**
+        - id: movement-middleend-route
+          url: lb://MOVEMENT-MIDDLEEND
+          predicates:
+            - Path= /api/v1/movement/**
